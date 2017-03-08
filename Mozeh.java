@@ -1,6 +1,4 @@
-package com.example.moaaznash.testata.mozeh;
-
-import android.os.DeadSystemException;
+package com.example.moaaznash.mozehlibraryandroid;
 
 /**
  * Created by moaaznash on 3/8/17.
@@ -8,8 +6,8 @@ import android.os.DeadSystemException;
 
 public class Mozeh {
     public void goo(){
-        System.out.println("Shit");
 
+        System.out.println("Hello");
 
     }
 }
