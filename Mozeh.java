@@ -10,4 +10,8 @@ public class Mozeh {
         System.out.println("Hello");
 
     }
+    public void goo2(){
+
+        System.out.println("Hello2");
+    }
 }
