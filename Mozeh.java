@@ -1,4 +1,4 @@
-package com.example.salem3anem.hs;
+package com.example.moaaznash.mozehandroidlibrary;
 
 import android.os.DeadSystemException;
 
