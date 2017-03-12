@@ -1,0 +1,36 @@
+/MozehIn interface defination and using as listener
+
+public interface MyListener {
+    // you can define any parameter as per your requirement
+    public void callback(View view, String result);
+}
+
+public class MyActivity extends Activity implements MyListener {
+   @override
+   public void onCreate(){
+        MyButton m = new MyButton(this);
+   }
+
+    // method invoke when mybutton will click
+    @override
+    public void callback(View view, String result) {
+        // do your stuff here
+    }
+}
+
+public class MyButton {
+    MyListener ml;
+
+    // constructor
+    MyButton(MyListener ml) {
+        this.ml = ml;
+    }
+
+    public void MyLogicToIntimateOthere() {
+        ml.callback(this, "success");
+    }
+}
+
+
+/MozehOut
+
