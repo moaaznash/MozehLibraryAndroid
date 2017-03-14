@@ -26,7 +26,7 @@ public class UsersFirTblMozeh {
 
     public String ImageName;
 
-public String IdFieldString = "Id";
+/*public String IdFieldString = "Id";
     public String UserNameFieldString = "UserName";
     public String FullNameFieldString = "FullName";
     public String PhoneFieldString = "Phone";
@@ -34,7 +34,7 @@ public String IdFieldString = "Id";
     public String EmailFieldString = "Email";
     public String NotesFieldString = "Notes";
     public String LoginTypeFieldString = "LoginType";
-    public String ImageNameFieldString = "ImageName";
+    public String ImageNameFieldString = "ImageName";*/
 
     public UsersFirTblMozeh() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)

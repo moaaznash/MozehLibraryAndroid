@@ -7,3 +7,5 @@ public interface OnDataSnapResultListenerMoze{
     public void onMultiDataSnapShot(List<UsersFirTblMozeh> usersFirTblMozehs);
 
 }
+
+

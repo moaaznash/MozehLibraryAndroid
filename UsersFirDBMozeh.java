@@ -22,14 +22,14 @@ public class UsersFirDBMozeh {
 
     private DatabaseReference mDatabase;
     private UsersFirTblMozeh user;
-    private OnDataSnapResultListenerMoze onDataSnapResultListenerMoze;
+    //private OnDataSnapResultListenerMoze onDataSnapResultListenerMoze;
 // ...
 
-    public UsersFirDBMozeh(OnDataSnapResultListenerMoze onDataSnapResultListenerMoze)
+    public UsersFirDBMozeh()
 
     {
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        this.onDataSnapResultListenerMoze = onDataSnapResultListenerMoze;
+        //this.onDataSnapResultListenerMoze = onDataSnapResultListenerMoze;
     }
 
 
@@ -46,8 +46,13 @@ public class UsersFirDBMozeh {
 
         return true;
     }
+    public Boolean removeUserInformationsFirebaseByIdMozeh(UsersFirTblMozeh usersFirTblMozeh) {
 
-    public void getAllUserInformation() {
+        this.mDatabase.child("UsersInformations1").child(usersFirTblMozeh.Id).setValue(null);
+
+        return true;
+    }
+    public void getAllUserInformation(final OnDataSnapResultListenerMoze onDataSnapResultListenerMoze) {
 
         final List<UsersFirTblMozeh> users = new ArrayList<>();
 
@@ -75,7 +80,7 @@ public class UsersFirDBMozeh {
     }
 
 
-    public void getUserInformationById(String id) {
+    public void getUserInformationById(String id, final OnDataSnapResultListenerMoze onDataSnapResultListenerMoze) {
         // final List<UsersFirTblMozeh> users = new ArrayList<>();
 
         this.mDatabase.child("UsersInformations1").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
