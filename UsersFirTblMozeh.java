@@ -1,5 +1,6 @@
 package com.example.moaaznash.mozehlibraryandroid;
 
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 /**
@@ -8,7 +9,8 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class UsersFirTblMozeh {
 
-    public String Id;
+public String Id;
+
 
     public String UserName;
 
@@ -43,6 +45,7 @@ public class UsersFirTblMozeh {
     public UsersFirTblMozeh(String id, String userName, String fullName, String phone, String profilePicUrl, String email, String notes, String loginType, String imageName ) {
         this.Id = id;
 
+
         this.UserName = userName;
 
         this.FullName = fullName;
@@ -63,4 +66,9 @@ public class UsersFirTblMozeh {
 
     }
 
+public static String getAllValues(UsersFirTblMozeh usersFirTblMozeh){
+    String s = "";
+//    s = "Id: "+usersFirTblMozeh.Id+" - "+"User Name: "+usersFirTblMozeh.UserName+" - "+"FullName: "+usersFirTblMozeh.FullName+" - "+"Phone: "+usersFirTblMozeh.Phone+" - "+"Email: "+usersFirTblMozeh.Email+" - "+"ProfilePicUrl: "+usersFirTblMozeh.ProfilePicUrl+" - Image Name: "+usersFirTblMozeh.ImageName+" - LoginType: "+usersFirTblMozeh.LoginType+" - Notes: "+usersFirTblMozeh.Notes;
+    return s;
+}
 }

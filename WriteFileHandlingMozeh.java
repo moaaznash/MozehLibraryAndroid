@@ -44,8 +44,8 @@ public class WriteFileHandlingMozeh {
     }
 
 
-    public static void saveImageToInternalStorage(Bitmap finalBitmap, String dirPath,String fileName,OnDifferentActivitiesResultListenerMozeh onDifferentActivitiesResultListenerMozeh) {
-
+    public static void saveImageToInternalStorage(Bitmap finalBitmap, String fileName,OnDifferentActivitiesResultListenerMozeh onDifferentActivitiesResultListenerMozeh) {
+ String dirPath =WriteFileHandlingMozeh.getAppDirectoryRoot() + SettingPrametersMozeh.getImageSavingDirectory();
         File myDir = new File(dirPath);
         myDir.mkdirs();
         Log.d("MozehDir",myDir.getAbsolutePath()+"/"+fileName);
@@ -89,11 +89,11 @@ onDifferentActivitiesResultListenerMozeh.onProcessCompleteMozeh(new ResultSucces
 
       */
 
+    String ful =   getAppDirectoryRoot() + SettingPrametersMozeh.getImageSavingDirectory()+"/"+fullPath;
 
-
-       File file = new File(fullPath);
+       File file = new File(ful);
        if (file.exists()){
-Log.d("MozehGetTheImage","Internal");
+Log.d("MozehGetTheImage","Internal "+ful);
           bb = BitmapFactory.decodeFile(file.getAbsolutePath());
            onBitmapsProcessListenerMozeh.OnBitmapFinishloading(bb);
 
@@ -111,10 +111,10 @@ Log.d("MozehGetTheImage","Internal");
 
 
                            onBitmapsProcessListenerMozeh.OnBitmapFinishloading(resource);
-                           String dir = GlobalFunctionsMozeh.getTextSplitByChar("/",fullPath,true);
-                           String fileName = GlobalFunctionsMozeh.getTextSplitByChar("/",fullPath,false);
+                           //String dir = SettingPrametersMozeh.getImageSavingDirectory();
+                           String fileName = fullPath;
 
-                      saveImageToInternalStorage(resource, dir, fileName, new OnDifferentActivitiesResultListenerMozeh() {
+                      saveImageToInternalStorage(resource,  fileName, new OnDifferentActivitiesResultListenerMozeh() {
 
 
                           @Override

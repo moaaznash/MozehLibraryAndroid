@@ -1,11 +1,29 @@
 package com.example.moaaznash.mozehlibraryandroid;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+//import android.content;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.moaaznash.userregistrationmozeh.MainActivity;
+import com.example.moaaznash.userregistrationmozeh.R;
+import com.example.moaaznash.userregistrationmozeh.SignUpFragment;
+
+import java.lang.reflect.Field;
 import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
@@ -98,6 +116,36 @@ public class GlobalFunctionsMozeh  {
         }
         return res;
 
+    }
+
+
+    public static String printClassFields(Context context) {
+        StringBuilder result = new StringBuilder();
+        String newLine = System.getProperty("line.separator");
+
+        result.append( context.getClass().getName() );
+        result.append( " Object {" );
+        result.append(newLine);
+
+        //determine fields declared in this class only (no fields of superclass)
+        Field[] fields = context.getClass().getDeclaredFields();
+
+        //print field names paired with their values
+        for ( Field field : fields  ) {
+            result.append("  ");
+            try {
+                result.append( field.getName() );
+                result.append(": ");
+                //requires access to private field:
+                result.append( field.get(context) );
+            } catch ( IllegalAccessException ex ) {
+                System.out.println(ex);
+            }
+            result.append(newLine);
+        }
+        result.append("}");
+
+        return result.toString();
     }
 
     public static String getTextSplitByChar(String splitCharacter,String text,Boolean begain_end){
@@ -214,5 +262,95 @@ public static String generateUniqueFileName(){
        // public void onProcessCompleteMozeh(ResultSuccessMozeh resultSuccessMozeh);
     }
 
+    /**
+     * Mozeh
+     * Need Permission
+     * <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+     * @return
+     */
+    public static void checkInternetConnection(Context cont, final OnProcesResultListenerMozeh onProcesResultListenerMozeh) {
+      //  onProcesResultListenerMozeh.onProcessCompleteMozeh(new ResultSuccessMozeh(true,""));
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(cont);
+        String url ="http://www.google.com";
+
+// Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                      Log.d("Mozeh","Response is: "+ response.substring(0,500));
+                   onProcesResultListenerMozeh.onProcessCompleteMozeh(new ResultSuccessMozeh(true,""));
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Log.d("Mozeh","That didn't work!");
+                onProcesResultListenerMozeh.onProcessCompleteMozeh(new ResultSuccessMozeh(false,""));
+
+            }
+        });
+// Add the request to the RequestQueue.
+        queue.add(stringRequest);
+
+    }
+
+public interface OnProcesResultListenerMozeh{
+    public void onProcessCompleteMozeh(ResultSuccessMozeh resultSuccessMozeh);
+}
+
+
+    public static void checkIfSignedIn(FragmentManager fragmentManager) {
+        try {
+            if (SettingPrametersMozeh.getUserCredintials().Id != "") {
+                // Log.d("MozehCheckIfSignedIn", SettingPrametersMozeh.getUserCredintials().Id);
+
+
+               // GlobalFunctionsMozeh.showAlert(fragmentActivity.getApplicationContext(), "Signed In", "Ok");
+            } else {
+
+               fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.fr_container, new SignUpFragment()).commit();
+
+
+               // GlobalFunctionsMozeh.showAlert(fragmentActivity.getApplicationContext(), "Signed Out", "Ok");
+            }
+
+        }catch (Exception e){
+
+            fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.fr_container, new SignUpFragment()).commit();
+
+          //  GlobalFunctionsMozeh.showAlert(fragmentActivity.getApplicationContext(), "Signed Out", "Ok");
+
+        }
+    }
+
+/*
+    private void checkIfSignedInActivity(Activity activity) {
+        try {
+            if (SettingPrametersMozeh.getUserCredintials().Id != "") {
+                // Log.d("MozehCheckIfSignedIn", SettingPrametersMozeh.getUserCredintials().Id);
+
+
+                GlobalFunctionsMozeh.showAlert(activity.getApplicationContext(), "Signed In", "Ok");
+            } else {
+
+
+                MainActivity.this.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.fr_container, new SignUpFragment()).commit();
+
+
+                GlobalFunctionsMozeh.showAlert(activity.getApplicationContext(), "Signed Out", "Ok");
+            }
+
+        }catch (Exception e){
+
+            activity.this.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.fr_container, new SignUpFragment()).commit();
+
+            GlobalFunctionsMozeh.showAlert(activity.getApplicationContext(), "Signed Out", "Ok");
+
+        }
+    }
+*/
 
 }

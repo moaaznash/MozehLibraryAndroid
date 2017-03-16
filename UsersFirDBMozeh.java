@@ -35,20 +35,20 @@ public class UsersFirDBMozeh {
 
     public Boolean createUserInformationsFirebaseMozeh(UsersFirTblMozeh usersFirTblMozeh) {
 
-        this.mDatabase.child("UsersInformations1").push().setValue(usersFirTblMozeh);
+        this.mDatabase.child("UsersInformations").child(usersFirTblMozeh.Id).setValue(usersFirTblMozeh);
 
         return true;
     }
 
     public Boolean updateUserInformationsFirebaseByIdMozeh(UsersFirTblMozeh usersFirTblMozeh) {
 
-        this.mDatabase.child("UsersInformations1").child(usersFirTblMozeh.Id).setValue(usersFirTblMozeh);
+        this.mDatabase.child("UsersInformations").child(usersFirTblMozeh.Id).setValue(usersFirTblMozeh);
 
         return true;
     }
     public Boolean removeUserInformationsFirebaseByIdMozeh(UsersFirTblMozeh usersFirTblMozeh) {
 
-        this.mDatabase.child("UsersInformations1").child(usersFirTblMozeh.Id).setValue(null);
+        this.mDatabase.child("UsersInformations").child(usersFirTblMozeh.Id).setValue(null);
 
         return true;
     }
@@ -56,7 +56,7 @@ public class UsersFirDBMozeh {
 
         final List<UsersFirTblMozeh> users = new ArrayList<>();
 
-        this.mDatabase.child("UsersInformations1").addListenerForSingleValueEvent(new ValueEventListener() {
+        this.mDatabase.child("UsersInformations").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -83,7 +83,7 @@ public class UsersFirDBMozeh {
     public void getUserInformationById(String id, final OnDataSnapResultListenerMoze onDataSnapResultListenerMoze) {
         // final List<UsersFirTblMozeh> users = new ArrayList<>();
 
-        this.mDatabase.child("UsersInformations1").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+        this.mDatabase.child("UsersInformations").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             //UsersFirTblMozeh user = new UsersFirTblMozeh();
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
