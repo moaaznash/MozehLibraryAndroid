@@ -37,7 +37,7 @@ import java.util.TimeZone;
  * Created by moaaznash on 3/12/17.
  */
 
-public class GlobalFunctionsMozeh  {
+public class GlobalFunctionsMozeh {
 
     public static Boolean validateEmail(String testStr) {
         //  let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
@@ -54,7 +54,7 @@ public class GlobalFunctionsMozeh  {
         String message = "";
         Boolean valid = validateEmail(email);
 
-        if (Objects.equals(fullName, "")){
+        if (Objects.equals(fullName, "")) {
             message = "يرجى ملأ حقل الأسم";
             res = new ResultSuccessMozeh(false, message);
             return res;
@@ -79,11 +79,11 @@ public class GlobalFunctionsMozeh  {
 
         if (!Objects.equals(password, "") && !Objects.equals(confirmPassword, "")) {
 
-            if(Objects.equals(password, confirmPassword)) {
+            if (Objects.equals(password, confirmPassword)) {
 
             } else {
                 message = "كلمة السر وتأكيد كلمة السر غير متطابقة يرجى المحاولة مجدداً";
-               // message = password + confirmPassword;
+                // message = password + confirmPassword;
                 res = new ResultSuccessMozeh(false, message);
                 return res;
             }
@@ -101,7 +101,7 @@ public class GlobalFunctionsMozeh  {
             return res;
         }
 
-        if (profilePicUrl == null ) {
+        if (profilePicUrl == null) {
 
             message = "يرجى ملأ اختيار صورة";
             res = new ResultSuccessMozeh(false, message);
@@ -123,22 +123,22 @@ public class GlobalFunctionsMozeh  {
         StringBuilder result = new StringBuilder();
         String newLine = System.getProperty("line.separator");
 
-        result.append( context.getClass().getName() );
-        result.append( " Object {" );
+        result.append(context.getClass().getName());
+        result.append(" Object {");
         result.append(newLine);
 
         //determine fields declared in this class only (no fields of superclass)
         Field[] fields = context.getClass().getDeclaredFields();
 
         //print field names paired with their values
-        for ( Field field : fields  ) {
+        for (Field field : fields) {
             result.append("  ");
             try {
-                result.append( field.getName() );
+                result.append(field.getName());
                 result.append(": ");
                 //requires access to private field:
-                result.append( field.get(context) );
-            } catch ( IllegalAccessException ex ) {
+                result.append(field.get(context));
+            } catch (IllegalAccessException ex) {
                 System.out.println(ex);
             }
             result.append(newLine);
@@ -148,44 +148,28 @@ public class GlobalFunctionsMozeh  {
         return result.toString();
     }
 
-    public static String getTextSplitByChar(String splitCharacter,String text,Boolean begain_end){
+    public static String getTextSplitByChar(String splitCharacter, String text, Boolean begain_end) {
 
         String str = text;
         String newstr = "";
 
-        if (null != str && str.length() > 0 )
-        {
+        if (null != str && str.length() > 0) {
             int endIndex = str.lastIndexOf(splitCharacter);
-            if (endIndex != -1)
-            {
+            if (endIndex != -1) {
 
-              if(begain_end) {
-                   newstr = str.substring(0, endIndex); // not forgot to put check if(endIndex != -1)
-              }else {
-                  newstr = str.substring(endIndex + 1);
-              }
-              //  Log.d("Mozeh", newstr1);
+                if (begain_end) {
+                    newstr = str.substring(0, endIndex); // not forgot to put check if(endIndex != -1)
+                } else {
+                    newstr = str.substring(endIndex + 1);
+                }
+                //  Log.d("Mozeh", newstr1);
             }
         }
         return newstr;
 
     }
-public static void showAlert(Context cont,String message, String okButton){
 
-    AlertDialog.Builder builder = new AlertDialog.Builder(cont);
-    builder.setTitle("");
-    builder.setMessage(message);
-    builder.setPositiveButton(okButton, new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int id) {
-            // You don't have to do anything here if you just want it dismissed when clicked
-        }
-    });
-    builder.create();
-    builder.show();
-
-}
-
-    public static void showAlert(Context cont, String message, String okButton, final OnGlobalFunctionsMozehListeners onGlobalFunctionsMozehListeners){
+    public static void showAlert(Context cont, String message, String okButton) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(cont);
         builder.setTitle("");
@@ -193,7 +177,6 @@ public static void showAlert(Context cont,String message, String okButton){
         builder.setPositiveButton(okButton, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // You don't have to do anything here if you just want it dismissed when clicked
-onGlobalFunctionsMozehListeners.OnAlertDialogOkPressedMozeh();
             }
         });
         builder.create();
@@ -201,7 +184,23 @@ onGlobalFunctionsMozehListeners.OnAlertDialogOkPressedMozeh();
 
     }
 
-    public static String getCurrentDateAsLongInt(){
+    public static void showAlert(Context cont, String message, String okButton, final OnGlobalFunctionsMozehListeners onGlobalFunctionsMozehListeners) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(cont);
+        builder.setTitle("");
+        builder.setMessage(message);
+        builder.setPositiveButton(okButton, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // You don't have to do anything here if you just want it dismissed when clicked
+                onGlobalFunctionsMozehListeners.OnAlertDialogOkPressedMozeh();
+            }
+        });
+        builder.create();
+        builder.show();
+
+    }
+
+    public static String getCurrentDateAsLongInt() {
 
         // get the supported ids for GMT-08:00 (Pacific Standard Time)
         String[] ids = TimeZone.getAvailableIDs(-8 * 60 * 60 * 1000);
@@ -225,29 +224,29 @@ onGlobalFunctionsMozehListeners.OnAlertDialogOkPressedMozeh();
         Date trialTime = new Date();
         calendar.setTime(trialTime);
 
-        String date = String.valueOf(calendar.get(Calendar.YEAR)) + String.valueOf(calendar.get(Calendar.MONTH))+String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+String.valueOf(calendar.get(Calendar.HOUR))+String.valueOf(calendar.get(Calendar.MINUTE))+String.valueOf(calendar.get(Calendar.SECOND))+String.valueOf(calendar.get(Calendar.MILLISECOND));
+        String date = String.valueOf(calendar.get(Calendar.YEAR)) + String.valueOf(calendar.get(Calendar.MONTH)) + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)) + String.valueOf(calendar.get(Calendar.HOUR)) + String.valueOf(calendar.get(Calendar.MINUTE)) + String.valueOf(calendar.get(Calendar.SECOND)) + String.valueOf(calendar.get(Calendar.MILLISECOND));
 
-Log.d("MozehDate",String.valueOf(date));
+        Log.d("MozehDate", String.valueOf(date));
         return String.valueOf(date);
     }
-public static String generateUniqueFileName(){
-  return generateRanomNumber(11,99) + getCurrentDateAsLongInt();
+
+    public static String generateUniqueFileName() {
+        return generateRanomNumber(11, 99) + getCurrentDateAsLongInt();
 
 
-}
+    }
     //private static final String ALLOWED_CHARACTERS ="0123456789qwertyuiopasdfghjklzxcvbnm";
 
-    public static String generateRandomString(final int sizeOfRandomString)
-    {
-        String allowed_char ="0123456789qwertyuiopasdfghjklzxcvbnm";
-        final Random random=new Random();
-        final StringBuilder sb=new StringBuilder(sizeOfRandomString);
-        for(int i=0;i<sizeOfRandomString;++i)
+    public static String generateRandomString(final int sizeOfRandomString) {
+        String allowed_char = "0123456789qwertyuiopasdfghjklzxcvbnm";
+        final Random random = new Random();
+        final StringBuilder sb = new StringBuilder(sizeOfRandomString);
+        for (int i = 0; i < sizeOfRandomString; ++i)
             sb.append(allowed_char.charAt(random.nextInt(allowed_char.length())));
         return sb.toString();
     }
 
-    public static  String generateRanomNumber(int min,int max){
+    public static String generateRanomNumber(int min, int max) {
 
         Random r = new Random();
         int i1 = r.nextInt(max - min + 1);
@@ -256,24 +255,24 @@ public static String generateUniqueFileName(){
     }
 
 
-    public interface OnGlobalFunctionsMozehListeners{
+    public interface OnGlobalFunctionsMozehListeners {
 
-        public void   OnAlertDialogOkPressedMozeh();
-       // public void onProcessCompleteMozeh(ResultSuccessMozeh resultSuccessMozeh);
+        public void OnAlertDialogOkPressedMozeh();
+        // public void onProcessCompleteMozeh(ResultSuccessMozeh resultSuccessMozeh);
     }
 
     /**
      * Mozeh
      * Need Permission
      * <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+     *
      * @return
      */
     public static void checkInternetConnection(Context cont, final OnProcesResultListenerMozeh onProcesResultListenerMozeh) {
-      //  onProcesResultListenerMozeh.onProcessCompleteMozeh(new ResultSuccessMozeh(true,""));
+        //  onProcesResultListenerMozeh.onProcessCompleteMozeh(new ResultSuccessMozeh(true,""));
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(cont);
-        String url ="http://www.google.com";
+        String url = "http://www.google.com";
 
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -281,14 +280,14 @@ public static String generateUniqueFileName(){
                     @Override
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
-                      Log.d("Mozeh","Response is: "+ response.substring(0,500));
-                   onProcesResultListenerMozeh.onProcessCompleteMozeh(new ResultSuccessMozeh(true,""));
+                        Log.d("Mozeh", "Response is: " + response.substring(0, 500));
+                        onProcesResultListenerMozeh.onProcessCompleteMozeh(new ResultSuccessMozeh(true, ""));
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //Log.d("Mozeh","That didn't work!");
-                onProcesResultListenerMozeh.onProcessCompleteMozeh(new ResultSuccessMozeh(false,""));
+                onProcesResultListenerMozeh.onProcessCompleteMozeh(new ResultSuccessMozeh(false, ""));
 
             }
         });
@@ -297,9 +296,9 @@ public static String generateUniqueFileName(){
 
     }
 
-public interface OnProcesResultListenerMozeh{
-    public void onProcessCompleteMozeh(ResultSuccessMozeh resultSuccessMozeh);
-}
+    public interface OnProcesResultListenerMozeh {
+        public void onProcessCompleteMozeh(ResultSuccessMozeh resultSuccessMozeh);
+    }
 
 
     public static void checkIfSignedIn(FragmentManager fragmentManager) {
@@ -308,20 +307,20 @@ public interface OnProcesResultListenerMozeh{
                 // Log.d("MozehCheckIfSignedIn", SettingPrametersMozeh.getUserCredintials().Id);
 
 
-               // GlobalFunctionsMozeh.showAlert(fragmentActivity.getApplicationContext(), "Signed In", "Ok");
+                // GlobalFunctionsMozeh.showAlert(fragmentActivity.getApplicationContext(), "Signed In", "Ok");
             } else {
 
-               fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.fr_container, new SignUpFragment()).commit();
+                fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.fr_container, new SignUpFragment()).commit();
 
 
-               // GlobalFunctionsMozeh.showAlert(fragmentActivity.getApplicationContext(), "Signed Out", "Ok");
+                // GlobalFunctionsMozeh.showAlert(fragmentActivity.getApplicationContext(), "Signed Out", "Ok");
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.fr_container, new SignUpFragment()).commit();
 
-          //  GlobalFunctionsMozeh.showAlert(fragmentActivity.getApplicationContext(), "Signed Out", "Ok");
+            //  GlobalFunctionsMozeh.showAlert(fragmentActivity.getApplicationContext(), "Signed Out", "Ok");
 
         }
     }

@@ -35,7 +35,7 @@ public class FirebaseAuthProcessMozeh {
     private static FirebaseAuth.AuthStateListener mAuthListener;
 
 
-    public static void checkIfSignIn1(OnProcesResultListenerMozeh onProcesResultListenerMozeh){
+    public static void checkIfSignIn(OnProcesResultListenerMozeh onProcesResultListenerMozeh){
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -49,7 +49,7 @@ public class FirebaseAuthProcessMozeh {
 
     }
 
-    public static void checkIfSignIn(final Context cont, final FragmentManager fragmentManager) {
+    public static void checkIfSignIn2(final Context cont, final FragmentManager fragmentManager) {
         mAuth = FirebaseAuth.getInstance();
 
 
@@ -196,6 +196,8 @@ public class FirebaseAuthProcessMozeh {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w("Mozeh", "signInWithEmail:failed", task.getException());
+                            onProcesResultListenerMozeh.onProcessCompleteMozeh(new ResultSuccessMozeh(false,""));
+
                             //  Toast.makeText(EmailPasswordActivity.this, R.string.auth_failed,
                             //Toast.LENGTH_SHORT).show();
                             //onProcesResultListenerMozeh.onProcessCompleteMozeh(new ResultSuccessMozeh(false,""));
@@ -244,6 +246,8 @@ public class FirebaseAuthProcessMozeh {
                             Log.w("Mozeh", "signInWithEmail:failed", task.getException());
                             //  Toast.makeText(EmailPasswordActivity.this, R.string.auth_failed,
                             //Toast.LENGTH_SHORT).show();
+                            onProcesResultListenerMozeh.onProcessCompleteMozeh(new ResultSuccessMozeh(false,""));
+
                             //onProcesResultListenerMozeh.onProcessCompleteMozeh(new ResultSuccessMozeh(false,""));
                         } else {
                             //onProcesResultListenerMozeh.onProcessCompleteMozeh(new ResultSuccessMozeh(true,""));

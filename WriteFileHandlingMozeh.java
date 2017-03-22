@@ -16,6 +16,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.Objects;
 import java.util.Random;
 
 import static com.example.moaaznash.userregistrationmozeh.R.id.imageView;
@@ -91,9 +92,12 @@ onDifferentActivitiesResultListenerMozeh.onProcessCompleteMozeh(new ResultSucces
 
     String ful =   getAppDirectoryRoot() + SettingPrametersMozeh.getImageSavingDirectory()+"/"+fullPath;
 
+      String filess = GlobalFunctionsMozeh.getTextSplitByChar("/",ful,false);
+
        File file = new File(ful);
-       if (file.exists()){
-Log.d("MozehGetTheImage","Internal "+ful);
+       if (file.exists() && !Objects.equals(filess, "")){
+
+Log.d("MozehGetTheImage","Internal "+filess);
           bb = BitmapFactory.decodeFile(file.getAbsolutePath());
            onBitmapsProcessListenerMozeh.OnBitmapFinishloading(bb);
 

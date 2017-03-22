@@ -33,7 +33,7 @@ public class UsersFirDBMozeh {
     }
 
 
-    public Boolean createUserInformationsFirebaseMozeh(UsersFirTblMozeh usersFirTblMozeh) {
+    public Boolean createOrUpdateUserInformationsFirebaseMozeh(UsersFirTblMozeh usersFirTblMozeh) {
 
         this.mDatabase.child("UsersInformations").child(usersFirTblMozeh.Id).setValue(usersFirTblMozeh);
 
